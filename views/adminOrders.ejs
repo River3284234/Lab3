@@ -1,0 +1,17 @@
+<h1>Orders</h1>
+<% if (orders.length === 0) { %>
+  <p>No orders</p>
+<% } else { %>
+  <ul>
+    <% orders.forEach(order => { %>
+      <li>
+        <strong><%= order.name %></strong>: 
+        <%= order.items.join(', ') %>
+        <form method="POST" action="/admin/orders/delete/<%= order.id %>" style="display:inline;">
+          <button type="submit">Done</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+<a href="/admin">Back</a>

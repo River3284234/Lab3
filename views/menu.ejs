@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menu</title>
+</head>
+<body>
+  <h1>Menu (type: <%= type %>)</h1>
+  <form method="GET" action="/">
+    <label><input type="radio" name="type" value="async" <%= type === 'async' ? 'checked' : '' %> /> Async</label>
+    <label><input type="radio" name="type" value="callback" <%= type === 'callback' ? 'checked' : '' %> /> Callback</label>
+    <label><input type="radio" name="type" value="sync" <%= type === 'sync' ? 'checked' : '' %> /> Sync</label>
+    <label><input type="radio" name="type" value="promise" <%= type === 'promise' ? 'checked' : '' %> /> Promise</label>
+    <button type="submit">Refresh</button>
+  </form>
+  <% menu.forEach(item => { %>
+    <p><%= item.name %>: <%= item.price %> грн</p>
+  <% }) %>
+  <p>
+    <a href="/order?type=<%= type %>">Create order</a>
+  </p>
+  <form action="/admin/login" method="GET" style="margin-top:20px;">
+    <button type="submit">Admin</button>
+  </form>
+</body>
+</html>

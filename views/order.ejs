@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create order</title>
+</head>
+<body>
+  <h1>Create order (type: <%= type %>)</h1>
+
+  <form action="/order?type=<%= type %>" method="POST">
+    <label>Name:
+      <input type="text" name="name" required>
+    </label>
+
+    <h2>Choose items:</h2>
+    <% menu.forEach(item => { %>
+      <div>
+        <label>
+          <input type="checkbox" name="items" value="<%= item.name %>">
+          <%= item.name %> - <%= item.price %> грн
+        </label>
+      </div>
+    <% }) %>
+    <button type="submit">Done</button>
+  </form>
+  <p><a href="/?type=<%= type %>">Back</a></p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin</title>
+</head>
+<body>
+  <h1>Admin (Type: <%= type %>)</h1>
+  <form action="/admin/menu" method="GET">
+    <label>Choose Type:</label>
+    <select name="type" onchange="this.form.submit()">
+      <option value="async" <%= type === 'async' ? 'selected' : '' %>>Async</option>
+      <option value="callback" <%= type === 'callback' ? 'selected' : '' %>>Callback</option>
+      <option value="promise" <%= type === 'promise' ? 'selected' : '' %>>Promise</option>
+      <option value="sync" <%= type === 'sync' ? 'selected' : '' %>>Sync</option>
+    </select>
+  </form>
+  <h2>Menu</h2>
+  <ul>
+    <% menu.forEach(item => { %>
+      <li><%= item.name %> - <%= item.price %> грн
+        <form action="/admin/menu/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="name" value="<%= item.name %>">
+          <input type="hidden" name="type" value="<%= type %>">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <h2>Add new item</h2>
+  <form action="/admin/menu/add" method="POST">
+    <input type="hidden" name="type" value="<%= type %>">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Price: <input type="number" name="price" required></label><br>
+    <button type="submit">Add</button>
+  </form>
+  <p><a href="/">Back</a></p>
+</body>
+</html>
